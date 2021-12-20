@@ -15,6 +15,8 @@ function App() {
       .then((data) => setData(data.data));
   },[])
 
+  console.log(';lkwejrlwkejrw')
+
   return (
     <div className="App">
       <header className="App-header">
