@@ -15,6 +15,8 @@ into components, pages and api folders.
 
 ## set up
 
+gitRepo: https://github.com/ZoeKavanagh/my-property-app
+
 ```
 git clone repo
 npm i
