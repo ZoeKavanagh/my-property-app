@@ -16,5 +16,9 @@
   "dependencies": {
     "@mui/material": "^5.2.4",
     "express": "^4.17.2"
+  },
+  "devDependencies": {
+    "@types/react-router-dom": "^5.3.2",
+    "@types/styled-components": "^5.1.18"
   }
 }

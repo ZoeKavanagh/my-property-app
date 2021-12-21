@@ -1,20 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
+import EditModal from './EditModal'
 import { Button, CardActionArea, CardActions } from '@mui/material';
+interface Property {
+  _id: any
+  type: string
+  price: number
+  description: string
+  image: string
+}
 
 interface PropertyCardProps {
+  saveEdit: (id: string, payload: any) => void
   property: any
-  onEdit: (id: string) => void
   onDelete: (id: string) => void
 }
 
-const PropertyCard = ({ property, onEdit, onDelete }: PropertyCardProps) => {
+const PropertyCard = ({ property, onDelete, saveEdit }: PropertyCardProps) => {
   const { image, id, price, description, type } = property
+  const [displayEditModal, setDisplayEditModal] = useState(false)
+
+  const handleOnEdit = () => {
+    setDisplayEditModal(true)
+  }
+  
+  const handleOnDelete = async () => {
+    try {
+      console.log('handleOnDelete', property._id.toString())
+      onDelete(property._id.toString())
+    } catch(error) {
+      // TODO: display user error message
+      console.log('error', error)
+    }
+  }
+
   return  (
-    <Card sx={{ maxWidth: 345 }}>
+    <>
+    <Card sx={{ maxWidth: '350px', padding: '25px', margin: '25px' }}>
       <CardActionArea>
           <CardMedia
             component="img"
@@ -24,7 +49,7 @@ const PropertyCard = ({ property, onEdit, onDelete }: PropertyCardProps) => {
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
-              {price}
+              {`£${price}`}
             </Typography>
             <Typography gutterBottom variant="h5" component="div">
               {type}
@@ -35,15 +60,23 @@ const PropertyCard = ({ property, onEdit, onDelete }: PropertyCardProps) => {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button size="small" color="primary" onClick={() => onEdit(id)}>
+          <Button size="small" color="primary" onClick={() => handleOnEdit()}>
             Edit
           </Button>
-          <Button size="small" color="primary" onClick={() => onDelete(id)}>
+          <Button size="small" color="primary" onClick={handleOnDelete}>
             Delete
           </Button>
         </CardActions>
       </Card>
-    )
+      <EditModal
+        key={property._id.toString()}
+        open={displayEditModal}
+        property={property}
+        handleClose={() => setDisplayEditModal(false)}
+        handleSave={saveEdit}
+      />
+    </>
+  )
 }
 
 export default PropertyCard

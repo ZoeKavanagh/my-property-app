@@ -1,4 +1,5 @@
 const Property = require('../models/property-model')
+const { ObjectId } = require('mongodb')
 
 createProperty = (req, res) => {
     const body = req.body
@@ -43,7 +44,8 @@ updateProperty = async (req, res) => {
         })
     }
 
-    Property.findOne({ _id: req.params.id }, (err, property) => {
+    Property.findOne({ _id: ObjectId(req.params.id) }, (err, property) => {
+        console.log('Property: ', property)
         if (err) {
             return res.status(404).json({
                 err,
@@ -51,10 +53,10 @@ updateProperty = async (req, res) => {
             })
         }
         property.description = body.description
-        movie.price = body.price
-        movie.image = body.image
-        movie.type = body.type
-        movie
+        property.price = body.price
+        property.image = body.image
+        property.type = body.type
+        property
             .save()
             .then(() => {
                 return res.status(200).json({
@@ -73,7 +75,7 @@ updateProperty = async (req, res) => {
 }
 
 deleteProperty = async (req, res) => {
-    await Property.findOneAndDelete({ _id: req.params.id }, (err, property) => {
+    await Property.findOneAndDelete({ _id: ObjectId(req.params.id) }, (err, property) => {
         if (err) {
             return res.status(400).json({ success: false, error: err })
         }
@@ -89,7 +91,7 @@ deleteProperty = async (req, res) => {
 }
 
 getPropertyById = async (req, res) => {
-    await Property.findOne({ _id: req.params.id }, (err, property) => {
+    await Property.findOne({ _id: ObjectId(req.params.id) }, (err, property) => {
         if (err) {
             return res.status(400).json({ success: false, error: err })
         }
