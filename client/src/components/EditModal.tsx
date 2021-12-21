@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { getPropertyById } from '../api';
 
+// TODO extract into types file
 interface Property {
   _id: any
   type: string
@@ -29,7 +28,6 @@ const EditModal = ({ property, open, handleClose, handleSave }: EditModal) => {
   
   const onSave = async () => {
     try {
-      //@ts-ignore
       handleSave(property._id.toString(), updatedDetails)
       handleClose()
     } catch(error) {

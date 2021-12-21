@@ -1,17 +1,10 @@
-import React, { useState } from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
+import React, { useState } from 'react'
+import Card from '@mui/material/Card'
+import CardContent from '@mui/material/CardContent'
+import CardMedia from '@mui/material/CardMedia'
+import Typography from '@mui/material/Typography'
 import EditModal from './EditModal'
-import { Button, CardActionArea, CardActions } from '@mui/material';
-interface Property {
-  _id: any
-  type: string
-  price: number
-  description: string
-  image: string
-}
+import { Button, CardActionArea, CardActions } from '@mui/material'
 
 interface PropertyCardProps {
   saveEdit: (id: string, payload: any) => void
@@ -29,23 +22,22 @@ const PropertyCard = ({ property, onDelete, saveEdit }: PropertyCardProps) => {
   
   const handleOnDelete = async () => {
     try {
-      console.log('handleOnDelete', property._id.toString())
       onDelete(property._id.toString())
     } catch(error) {
       // TODO: display user error message
       console.log('error', error)
     }
   }
-
+  // TODO fix image size
   return  (
     <>
-    <Card sx={{ maxWidth: '350px', padding: '25px', margin: '25px' }}>
+    <Card sx={{ width: '350px', padding: '25px', margin: '25px' }}>
       <CardActionArea>
           <CardMedia
             component="img"
             height="140"
             image={image}
-            alt="green iguana"
+            alt="property image"
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography'
+import Button from '@mui/material/Button'
 import { useHistory } from 'react-router-dom'
 import PropertyCard from '../components/PropertyCard'
 
@@ -11,11 +11,8 @@ const PropertyListContainer = styled.div`
  display: flex;
  align-self: center;
  flex-direction: column;
- height: '800px';
- width: '400px';
  justify-content: center;
  align-items: center;
- padding: '25px';
 `
 
 const EmptyPlaceholder = styled.div`
@@ -25,7 +22,7 @@ const EmptyPlaceholder = styled.div`
 `
 
 const PropertyScrollWrapper = styled.div`
-  max-height: 1000px;
+  max-height: 700px;
   overflow-y: scroll;
   position: sticky;
 `
@@ -65,7 +62,6 @@ const PropertiesList = () => {
             property._id !== id
           })
 
-          //@ts-ignore
           setProperties(updatedProperties)
         } catch (error) {
           // TODO: display error message to user
